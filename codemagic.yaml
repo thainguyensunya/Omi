@@ -8,7 +8,7 @@ workflows:
       android_signing:
         - keystore_reference
       groups:
-        - google_play # <-- (Includes GCLOUD_SERVICE_ACCOUNT_CREDENTIALS)
+        # - google_play # <-- (Includes GCLOUD_SERVICE_ACCOUNT_CREDENTIALS)
         - omi-dev-env-var
       vars:
         PACKAGE_NAME: "com.friend.ios"

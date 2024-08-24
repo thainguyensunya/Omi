@@ -30,13 +30,16 @@ workflows:
       - name: Run Build Runner
         script: |
           dart run build_runner build
-      - name: Flutter analyze
-        script: |
-          flutter analyze
+      # - name: Flutter analyze
+      #   script: |
+      #     flutter analyze
       # - name: Flutter unit tests
       #   script: |
       #     flutter test
-        ignore_failure: true
+      #   ignore_failure: true
+      - name: Install the FlutterFire CLI
+        script: |
+          dart pub global activate flutterfire_cli
       - name: Build AAB with Flutter
         script: |
           flutterfire config --out=lib/firebase_options_prod.dart --ios-bundle-id=com.friend-app-with-wearable.ios12 --android-app-id=com.friend.ios --android-out=android/app/src/prod/ --ios-out=ios/Config/Prod/

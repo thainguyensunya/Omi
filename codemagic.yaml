@@ -18,6 +18,7 @@ workflows:
       - name: Set up local.properties
         script: |
           ls -la
+          touch ${CM_BUILD_DIR}/android/local.properties
           echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
       - name: Get Flutter packages
         script: |

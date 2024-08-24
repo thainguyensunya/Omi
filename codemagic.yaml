@@ -9,6 +9,7 @@ workflows:
        - keystore_reference
      groups:
        - google_play # <-- (Includes GCLOUD_SERVICE_ACCOUNT_CREDENTIALS)
+       - omi-dev-env-var
      vars:
        PACKAGE_NAME: "com.friend.ios"
        GOOGLE_PLAY_TRACK: "alpha"
@@ -20,15 +21,15 @@ workflows:
      - name: Get Flutter packages
        script: |
          flutter packages pub get
-      - name: Create environment configuration
-        script: |
-          cat .env.template > .dev.env
-          sed -i "s/OPENAI_API_KEY=/OPENAI_API_KEY=$OPENAI_API_KEY/g" .dev.env
-          sed -i "s/API_BASE_URL=/API_BASE_URL=$API_BASE_URL/g" .dev.env
-          sed -i "s/GOOGLE_MAPS_API_KEY=/GOOGLE_MAPS_API_KEY=$GOOGLE_MAPS_API_KEY/g" .dev.env
-      - name: Run Build Runner
-        script: |
-          dart run build_runner build
+    - name: Create environment configuration
+      script: |
+        cat .env.template > .dev.env
+        sed -i "s/OPENAI_API_KEY=/OPENAI_API_KEY=$OPENAI_API_KEY/g" .dev.env
+        sed -i "s/API_BASE_URL=/API_BASE_URL=$API_BASE_URL/g" .dev.env
+        sed -i "s/GOOGLE_MAPS_API_KEY=/GOOGLE_MAPS_API_KEY=$GOOGLE_MAPS_API_KEY/g" .dev.env
+    - name: Run Build Runner
+      script: |
+        dart run build_runner build
      - name: Flutter analyze
        script: |
          flutter analyze

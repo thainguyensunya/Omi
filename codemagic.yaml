@@ -5,8 +5,8 @@ workflows:
     max_build_duration: 120
     working_directory: app
     environment:
-      android_signing:
-        - keystore_reference
+      # android_signing:
+      #   - keystore_reference
       groups:
         # - google_play # <-- (Includes GCLOUD_SERVICE_ACCOUNT_CREDENTIALS)
         - omi-dev-env-var

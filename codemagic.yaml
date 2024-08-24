@@ -68,6 +68,7 @@ workflows:
       groups:
         - appstore_credentials
         - firebase_credentials
+        - omi-dev-env-var
     scripts:
       - name: Set up code signing settings on Xcode project
         script: |
@@ -75,9 +76,21 @@ workflows:
       - name: Get Flutter packages
         script: |
           flutter packages pub get
-      - name: Install pods
+      - name: Install iOS pods
         script: |
-          find . -name "Podfile" -execdir pod install \;
+          cd ios
+          pod install
+          pod repo update
+      - name: Create environment configuration
+        script: |
+          cd ..
+          cat .env.template > .dev.env
+          sed -i "s/OPENAI_API_KEY=/OPENAI_API_KEY=$OPENAI_API_KEY/g" .dev.env
+          sed -i "s/API_BASE_URL=/API_BASE_URL=$API_BASE_URL/g" .dev.env
+          sed -i "s/GOOGLE_MAPS_API_KEY=/GOOGLE_MAPS_API_KEY=$GOOGLE_MAPS_API_KEY/g" .dev.env
+      - name: Run Build Runner
+        script: |
+          dart run build_runner build
       - name: Flutter analyze
         script: |
           flutter analyze

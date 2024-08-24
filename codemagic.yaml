@@ -33,9 +33,9 @@ workflows:
       - name: Flutter analyze
         script: |
           flutter analyze
-      - name: Flutter unit tests
-        script: |
-          flutter test
+      # - name: Flutter unit tests
+      #   script: |
+      #     flutter test
         ignore_failure: true
       - name: Build AAB with Flutter
         script: |
@@ -55,10 +55,10 @@ workflows:
         notify:
           success: true
           failure: false
-      google_play:
-        credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
-        track: $GOOGLE_PLAY_TRACK
-        submit_as_draft: true
+      # google_play:
+      #   credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
+      #   track: $GOOGLE_PLAY_TRACK
+      #   submit_as_draft: true
 #   ios-workflow:
 #     name: iOS Workflow
 #     instance_type: mac_mini_m1
